@@ -16,49 +16,25 @@ import java.util.Random;
 public class MissingInteger {
 
     public static void main(String[] args){
-        int[] test = new int[100];
-         //generate an array with 100 elements and on random missing number.
-        Random rand = new Random();
-        int min = 1;
-        int max = 100;
 
-        int randval = min + rand.nextInt(max - min);
+        int[] sample = {1, 2, 4, 5};
 
-        int counter =1;
-        for(int i = 0; i < 100; i++ ){
 
-                test[i] = counter;
-                counter++;
-
-        }
-
-        //add a random number into the array at a random position for testing
-            test[randval]=randval;
-
-        System.out.println(findMissingInteger(test));
-
-        System.out.println(Arrays.toString(test));
+        System.out.println(singleMissingElement(sample, sample.length + 1));
 
     }
 
-    public static int findMissingInteger(int[] arr){
+    // use the series n(n + 1)/2 for n is the size of the array.
+    public static int singleMissingElement(int[] arr, int count){
 
-        if(arr == null || arr.length < 100){
-            throw  new IllegalArgumentException("Array does not satisfy the problem");
+        int expectedSum = count*(count + 1)/2;
+
+        int realSum = 0;
+        for (int val : arr){
+            realSum +=val;
         }
 
-        Arrays.sort(arr);
-        int counter = 1;
-        int missing = Integer.MAX_VALUE;
+        return expectedSum - realSum;
 
-        for (int val:arr){
-            if(val != counter){
-                missing = counter;
-            }
-            counter++;
-        }
-
-
-        return  missing;
     }
 }

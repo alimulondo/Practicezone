@@ -35,14 +35,9 @@ public class MissingInteger {
         //add a random number into the array at a random position for testing
             test[randval]=randval;
 
-        //Build a string from the array to print out the generated array.
-           String str = "";
-           for (int val: test){
-               str = str +","+val;
-           }
-
         System.out.println(findMissingInteger(test));
-        System.out.println(str);
+
+        System.out.println(Arrays.toString(test));
 
     }
 

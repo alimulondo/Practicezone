@@ -1,7 +1,6 @@
 package com.zaictronics;
 
-import java.util.Arrays;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Author: Ali Mulondo
@@ -17,10 +16,10 @@ public class MissingInteger {
 
     public static void main(String[] args){
 
-        int[] sample = {1, 2, 4, 5};
+        int[] sample = {4, 1};
 
-
-        System.out.println(singleMissingElement(sample, sample.length + 1));
+        List<Integer> elements = multipleMissingNumb(sample, 5);
+        System.out.println(elements);
 
     }
 
@@ -36,5 +35,29 @@ public class MissingInteger {
 
         return expectedSum - realSum;
 
+    }
+
+    /*
+    * find multiple missing elements using BitSet data structure
+    * assuming no duplicate elements available
+    * works for both sorted and unsorted array
+    * */
+    public static List<Integer> multipleMissingNumb(int[] arr, int size){
+        int missingelements = size - arr.length;
+        int nextmiss = 0;
+        List<Integer> elements = new ArrayList<>();
+        BitSet bitset = new BitSet(size);
+
+        for (int val : arr){
+            bitset.set(val -1);
+        }
+
+        for(int i=0; i < missingelements; i++){
+            nextmiss = bitset.nextClearBit(nextmiss);
+            nextmiss +=1;
+            elements.add(nextmiss);
+        }
+
+        return elements;
     }
 }
